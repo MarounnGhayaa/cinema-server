@@ -10,3 +10,5 @@ $query = "CREATE TABLE auditoriums (
 
 $execute = $mysqli->prepare($query);
 $execute->execute();
+
+echo json_encode("Auditoriums table created successfully.");

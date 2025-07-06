@@ -1,5 +1,7 @@
 <?php
+
 require("../connection/connection.php");
+require("../Models/Movie.php");
 
 $movies = [
     [
@@ -45,9 +47,6 @@ $movies = [
 ];
 
 foreach ($movies as $movie) {
-    $stmt = $mysqli->prepare("INSERT INTO movies (title, description, cast, rating, genre, image_url) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $movie["title"], $movie["description"], $movie["cast"], $movie["rating"], $movie["genre"], $movie["image_url"]);
-    $stmt->execute();
+    $movie = Movie::Create($mysqli, $movie, "ssssss");
 }
-
 echo json_encode("Movies seeded successfully.");

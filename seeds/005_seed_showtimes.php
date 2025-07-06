@@ -1,5 +1,7 @@
 <?php
+
 require("../connection/connection.php");
+require("../Models/Showtime.php");
 
 $movie_ids = [];
 $result = $mysqli->query("SELECT id FROM movies");
@@ -24,10 +26,8 @@ $showtimes = [
     ["movie_id" => $movie_ids[1], "auditorium_id" => $auditorium_ids[1], "show_date" => "2025-07-03", "show_time" => "11:00:00"]
 ];
 
-foreach ($showtimes as $show) {
-    $stmt = $mysqli->prepare("INSERT INTO showtimes (movie_id, auditorium_id, show_date, show_time) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("iiss", $show["movie_id"], $show["auditorium_id"], $show["show_date"], $show["show_time"]);
-    $stmt->execute();
-}
 
+foreach ($showtimes as $showtime) {
+    $showtime = Showtime::Create($mysqli, $showtime, "iiss");
+}
 echo json_encode("Showtimes seeded successfully.");

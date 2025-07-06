@@ -13,3 +13,5 @@ $query = "CREATE TABLE movies (
 
 $execute = $mysqli->prepare($query);
 $execute->execute();
+
+echo json_encode("Movies table created successfully.");

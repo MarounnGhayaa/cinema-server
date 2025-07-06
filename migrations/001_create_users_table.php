@@ -14,3 +14,5 @@ $query = "CREATE TABLE users (
 
 $execute = $mysqli->prepare($query);
 $execute->execute();
+
+echo json_encode(value: "Users table created successfully.");

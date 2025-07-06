@@ -1,5 +1,7 @@
 <?php
+
 require("../connection/connection.php");
+require("../Models/User.php");
 
 $users = [
     [
@@ -47,12 +49,10 @@ $users = [
         "age" => 17,
         "role" => "user"
     ],
-    ];
+];
 
 foreach ($users as $user) {
-    $stmt = $mysqli->prepare("INSERT INTO users (name, email, password, favorite_genre, phone_number, age, role) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssiis", $user["name"], $user["email"], $user["password"], $user["favorite_genre"],$user["phone_number"], $user["age"], $user["role"]);
-    $stmt->execute();
+    $user = User::Create($mysqli, $user, "ssssiis");
 }
 
 echo json_encode("Users seeded successfully.");

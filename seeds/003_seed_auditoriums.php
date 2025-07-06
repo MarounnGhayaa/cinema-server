@@ -1,5 +1,7 @@
 <?php
+
 require("../connection/connection.php");
+require("../Models/Auditorium.php");
 
 $auditoriums = [
     [
@@ -30,9 +32,6 @@ $auditoriums = [
 ];
 
 foreach ($auditoriums as $auditorium) {
-    $stmt = $mysqli->prepare("INSERT INTO auditoriums (name, seat_capacity, type) VALUES (?, ?, ?)");
-    $stmt->bind_param("sis", $auditorium["name"], $auditorium["seat_capacity"], $auditorium["type"]);
-    $stmt->execute();
+    $auditorium = Auditorium::Create($mysqli, $auditorium, "sis");
 }
-
 echo json_encode("Auditoriums seeded successfully.");

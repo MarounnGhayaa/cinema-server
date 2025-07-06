@@ -8,10 +8,9 @@ $query = "CREATE TABLE showtimes (
     show_date DATE NOT NULL,
     show_time TIME NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movies(id),
-    FOREIGN KEY (auditorium_id) REFERENCES auditoriums(id)
-)";
+    FOREIGN KEY (auditorium_id) REFERENCES auditoriums(id))";
 
 $execute = $mysqli->prepare($query);
 $execute->execute();
 
-echo "Showtimes table created successfully.";
+echo json_encode("Showtimes table created successfully.");

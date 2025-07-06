@@ -49,16 +49,23 @@ abstract class Model{
         return $mysqli->insert_id;
     }
 
-    public static function delete(mysqli $mysqli, int $id) {
+    public static function deleteByID(mysqli $mysqli, int $id) {
         $sql = sprintf("DELETE FROM %s WHERE %s = ?",
          static::$table, static::$primary_key);
 
         $query = $mysqli->prepare($sql);
         $query->bind_param("i", $id);
         
-        return $query->execute();
+        return $query->execute();  
+    }
 
+    public static function deleteAll(mysqli $mysqli) {
+        $sql = sprintf("DELETE FROM %s",
+         static::$table);
+
+        $query = $mysqli->prepare($sql); 
         
+        return $query->execute();  
     }
 
     public static function update(mysqli $mysqli, string $types, string $column_name, $new_value, int $id){

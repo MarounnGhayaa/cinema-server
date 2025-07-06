@@ -10,3 +10,5 @@ $query = "CREATE TABLE seats (
 
 $execute = $mysqli->prepare($query);
 $execute->execute();
+
+echo json_encode("Seats table created successfully.");
